@@ -1,0 +1,28 @@
+
+@charset "utf-8";
+
+@font-face {
+	font-family: 'Yanone Kaffeesatz';
+	font-style: normal;
+	font-weight: 400;
+	src: url('https://fonts.gstatic.com/s/yanonekaffeesatz/v8/YDAoLskQQ5MOAgvHUQCcLfGwxTS8d1Q9KiDNCMKLFUM.woff2') format('woff2');
+}
+
+.editbox {
+	padding-bottom: 1%
+}
+
+.feature-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flexitem {
+  flex: 0 0 30%;
+  max-width: 50%;
+}
+
+.iobox {
+	flex: 0 0 50%;
+	max-width: 50%;
+}

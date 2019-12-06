@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>XML Editor</title>
+    <script type="text/javascript" src="/eel.js"></script>
+	<!--
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    -->
+	<script type="text/javascript" src="js/script.js" charset="UTF-8"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body style="height: 100vh">
+	<header>
+		<div style="font-family: 'Yanone Kaffeesatz';text-align: center;font-size: 400%;background-color: aquamarine;">XML Editor</div>
+	</header>
+	
+	<div style="padding-top: 1.5vh"></div>
+	
+	<article style="font-size: 150%"><!--;height: 100vh">-->
+		<div>
+			<div class="feature-list">
+				<a class="flexitem">Input XML Path</a>
+				<div class="flexitem">
+					<input type="text" value="src/kiji_base.dat" style="font-size: 100%" id="input">
+					<input type="button" onclick="select_file()" style="width: 5vh;height:100%;font-size: 90%;background-color: lawngreen;" value="参照">
+				</div>
+				
+				<div class="flexitem"><input type="button" onclick="xmlload()" style="width: 10vh;height:100%;font-size: 90%;background-color: lawngreen;" value="読み込み"></div>
+				
+				
+			</div>
+			
+			<div>
+			<input type="checkbox" id="idname" style="width: 2vh;height: 2vh" checked="checked">
+			<a>sample</a>
+			<input type="checkbox" id="filenameflag" style="width: 2vh;height: 2vh" checked="checked">
+			<a>sample</a>
+			<div style="padding-top: 3.5vh"></div>
+			</div>
+			
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>MediaCode 【】</a></div>
+				<div class="flexitem"><input type="text" style="font-size: 100%" id="mediacode"></div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="mediacodedisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>PageCode 【】</a></div>
+				<div class="flexitem"><input type="text" style="font-size: 100%" id="pagecode"></div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="pagecodedisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>sample 【日付】</a></div>
+				<div class="flexitem"><input type="text" value="20201001" style="font-size: 100%" id="publishdate"></div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="publishdatedisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+			
+			<div style="padding-top: 2vh"></div>
+			
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>sample 【グループ名】</a></div>
+				<div class="flexitem"><input type="text" style="font-size: 100%" value="2019南砂テスト" id="group"></div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="groupdisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>sample 【素材名称】</a></div>
+				<div class="flexitem"><input type="text" oninput="idisname();filename()" style="font-size: 100%" id="sozname"></div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="soznamedisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+
+			<div style="padding-top: 2vh"></div>
+			
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>sample 【】</a></div>
+				<div class="flexitem"><input type="text" style="font-size: 100%" id="npid"  oninput="idequal()"></div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="npiddisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>sample 【】</a></div>
+				<div class="flexitem"><input type="text" style="font-size: 100%" id="nsid"></div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="nsiddisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+			
+			<div style="padding-top: 2vh"></div>
+			
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>sample 【sample】</a></div>
+				<div class="flexitem">
+					<input type="text" style="font-size: 100%;width: 40%" id="numofupdate">
+					<input type="button" onclick="plus()" value="+" style="font-size: 100%">
+					<input type="button" onclick="minus()" value="-" style="font-size: 100%">
+					<input type="button" onclick="zero()" value="0" style="font-size: 100%">
+				</div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="numofupdatedisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+			
+			<div style="padding-top: 2vh"></div>
+			
+			<div class="editbox feature-list">
+				<div class="flexitem"><a>text 【sample】</a></div>
+				<div class="flexitem"><input type="text" style="font-size: 100%" id="text"></div>
+				<div class="flexitem"><a>変更前</a>
+				<a id="textdisp">---</a>
+				<!--
+				<a>→</a>
+				<a>変更後</a>
+				<a>---</a>
+				-->
+				</div>
+			</div>
+			
+			<div class="feature-list">
+				<a class="flexitem">ファイル名</a>
+				<input type="text" id="filename" style="font-size: 100%" oninput="changename()">
+			</div>
+			<div style="padding-top: 1vh"></div>
+			<div class="feature-list">
+				<a class="flexitem">Output XML Path</a>
+				<input type="text" value="output/kiji_edit.dat" style="font-size: 100%" id="outputpath">
+			</div>
+			
+			
+			<div style="padding-top: 3vh"></div>
+			
+			<div style="text-align: center">
+				<input type="button" onclick="xmledit()" style="width: 20%;font-size: 150%;background-color: coral" value="編集開始">
+				<a id="result" style="padding-left: 2.5%;font-style: italic;color: deeppink"></a>
+			</div>
+			
+		</div>
+	</article>
+	
+	<footer>
+	
+	</footer>
+</body>
+</html>
